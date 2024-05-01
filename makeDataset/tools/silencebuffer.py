@@ -2,6 +2,7 @@ from pydub import AudioSegment
 from pydub.silence import split_on_silence
 import os
 import glob
+import tqdm
 
 # input path to segmentedAudio folder here and create the paddedAudio folder and put its path here as well.
 source_dir = './audio/'
@@ -11,7 +12,7 @@ os.makedirs(target_dir, exist_ok=True)
 
 wav_files = glob.glob(os.path.join(source_dir, '*.wav'))
 
-for wav_file in wav_files:
+for wav_file in tqdm.tqdm(wav_files):
     audio = AudioSegment.from_wav(wav_file)
     chunks = split_on_silence(audio,
     min_silence_len= 232, # minimum length of silence required for a split in ms
