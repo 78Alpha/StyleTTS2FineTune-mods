@@ -1,0 +1,1 @@
+python makeDataset/tools/silencebuffer.py && rm ./audio/*.wav && mv ./silencedAudio/*.wav ./audio/ && cd ./srt/ && for i in ../audio/*.wav; do whisperx "$i" --model large-v3 --align_model WAV2VEC2_ASR_LARGE_LV60K_960H --output_format srt; done && cd ../ && python makeDataset/tools/srtsegmenter.py && python makeDataset/tools/phonemized.py
